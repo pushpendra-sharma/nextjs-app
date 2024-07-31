@@ -1,13 +1,12 @@
 import { Dispatch, ReactNode, SetStateAction } from 'react';
 import { QuestionStatusType } from './question';
 import { ActionType } from '@/reducers/actions';
+import { ResponseStateType } from '@/reducers';
 
 export type AppContextType = {
   questionId: QuestionStatusType;
   setQuestionId: Dispatch<SetStateAction<QuestionStatusType>>;
-  responses: {
-    [questionId: string]: string;
-  };
+  responses: ResponseStateType;
   dispatch: Dispatch<ActionType>;
   progress: number;
 };

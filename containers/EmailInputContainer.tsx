@@ -3,6 +3,7 @@ import { Button, Error, TextInput } from '@/components';
 import { AppContext } from '@/contexts/app-context';
 import { QuestionType } from '@/types';
 import { isValidEmail } from '@/utils/helper';
+import { SET_EMAIL } from '@/reducers/actions';
 
 type Props = {
   type: QuestionType;
@@ -12,7 +13,7 @@ export function EmailInputContainer({ type }: Props) {
   const { questionId, setQuestionId, dispatch, responses } =
     useContext(AppContext);
 
-  const [value, setValue] = useState(responses[type]);
+  const [value, setValue] = useState(responses.email);
   const [error, setError] = useState(false);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = e => {
@@ -26,7 +27,7 @@ export function EmailInputContainer({ type }: Props) {
         current: questionId.current + 1,
         next: questionId.next + 1,
       });
-      dispatch({ type: `SET_${type.toUpperCase()}`, payload: value });
+      dispatch({ type: SET_EMAIL, payload: value });
     } else setError(true);
   };
 

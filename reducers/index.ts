@@ -8,14 +8,20 @@ import {
   SET_ROLE,
 } from './actions';
 
-export type ResponseStateType = Record<QuestionType, string>;
+export type ResponseStateType = {
+  name: string;
+  email: string;
+  industry: string;
+  role: string;
+  goal: string[];
+};
 
 export const initialState: ResponseStateType = {
   name: '',
   email: '',
   industry: '',
   role: '',
-  goal: '',
+  goal: [],
 };
 
 export function appReducer(
@@ -33,7 +39,10 @@ export function appReducer(
       return { ...state, role: action.payload };
 
     case SET_GOAL:
-      return { ...state, goal: action.payload };
+      if (state.goal.includes(action.payload)) {
+        const newGoal = state.goal.filter(item => item !== action.payload);
+        return { ...state, goal: newGoal };
+      } else return { ...state, goal: [...state.goal, action.payload] };
 
     case SET_EMAIL:
       return { ...state, email: action.payload };

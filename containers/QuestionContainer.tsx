@@ -3,6 +3,8 @@ import { questions } from '@/utils/constants';
 import { QuestionType } from '@/types';
 import {
   EmailInputContainer,
+  GoalInputContainer,
+  IndustryInputContainer,
   NameInputContainer,
   RoleInputContainer,
 } from './';
@@ -23,7 +25,9 @@ export function QuestionContainer({ type }: Props) {
       />
       {type === 'name' && <NameInputContainer type={type} />}
       {type === 'role' && <RoleInputContainer type={type} />}
+      {type === 'industry' && <IndustryInputContainer type={type} />}
       {type === 'email' && <EmailInputContainer type={type} />}
+      {type === 'goal' && <GoalInputContainer type={type} />}
     </>
   );
 }

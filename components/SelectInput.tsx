@@ -3,14 +3,14 @@ import { MouseEventHandler } from 'react';
 
 type SelectInputProps = {
   title: string;
-  value: string;
+  values: string[];
   options: SelectOptionsType;
   handleClick: MouseEventHandler<HTMLButtonElement>;
 };
 
 export const SelectInput = ({
   title,
-  value,
+  values,
   options,
   handleClick,
 }: SelectInputProps) => {
@@ -20,14 +20,16 @@ export const SelectInput = ({
         <button
           key={item.label}
           className={`p-2 border-2  max-w-max bg-neutral-950 text-white min-w-full text-lg rounded flex gap-4 items-center  hover:bg-neutral-800 hover:border-white ${
-            item.value === value ? 'border-white' : 'border-gray-500'
+            values.includes(item.value) ? 'border-white' : 'border-gray-500'
           }`}
           onClick={handleClick}
           value={item.value}
         >
           <span
             className={`border p-1 w-8 aspect-square rounded text-sm font-medium  ${
-              item.value === value ? 'bg-white text-black' : 'bg-zinc-950'
+              values.includes(item.value)
+                ? 'bg-white text-black'
+                : 'bg-zinc-950'
             }`}
           >
             {String.fromCharCode(65 + index)}

@@ -11,7 +11,7 @@ export const AppContext = createContext<AppContextType>({
   setQuestionId: () => {},
   dispatch: () => {},
   progress: 0,
-  responses: {},
+  responses: initialState,
 });
 
 AppContext.displayName = 'AppContext';
@@ -28,7 +28,8 @@ export const AppProvider = ({ children }: AppProviderType) => {
   const progress = useMemo(() => {
     let count = 0;
     Object.values(state).forEach(value => {
-      if (value) count++;
+      if (typeof value === 'string' && value) count++;
+      else if (Array.isArray(value) && value.length > 0) count++;
     });
 
     return count;
